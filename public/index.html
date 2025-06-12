@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#FF6B35',secondary:'#2EC4B6'},borderRadius:{'none':'0px','sm':'4px',DEFAULT:'8px','md':'12px','lg':'16px','xl':'20px','2xl':'24px','3xl':'32px','full':'9999px','button':'8px'}}}}</script>
+    <style>
+        :where([class^="ri-"])::before { content: "\f3c2"; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .menu-tab.active {
+            color: #FF6B35;
+            border-bottom: 2px solid #FF6B35;
+        }
+        .menu-section:not(.active) {
+            display: none;
+        }
+        .header-bg {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .custom-checkbox {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            position: relative;
+        }
+        .custom-checkbox:checked {
+            background-color: #FF6B35;
+            border-color: #FF6B35;
+        }
+        .custom-checkbox:checked::after {
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            top: 2px;
+            left: 6px;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 header-bg shadow-sm transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <h1 class="text-2xl font-['Pacifico'] text-primary">Seasons Restaurant</h1>
+            </div>
+            <div class="flex items-center gap-3">
+                <button class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-700">
+                    <i class="ri-search-line"></i>
+                </button>
+                <button class="flex items-center justify-center w-8 h-8 rounded-full bg-gray-100 text-gray-700">
+                    <i class="ri-shopping-cart-line"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Category Tabs -->
+    <div class="sticky top-14 z-40 bg-white shadow-sm overflow-x-auto whitespace-nowrap scrollbar-hide pt-16 pb-2">
+        <div class="container mx-auto px-4 flex">
+            <button class="menu-tab active px-4 py-2 font-medium text-sm transition-all duration-200 focus:outline-none" data-target="specials">Today's Specials</button>
+            <button class="menu-tab px-4 py-2 font-medium text-sm transition-all duration-200 focus:outline-none" data-target="starters">Starters</button>
+            <button class="menu-tab px-4 py-2 font-medium text-sm transition-all duration-200 focus:outline-none" data-target="main">Main Course</button>
+            <button class="menu-tab px-4 py-2 font-medium text-sm transition-all duration-200 focus:outline-none" data-target="biryani">Biryani</button>
+            <button class="menu-tab px-4 py-2 font-medium text-sm transition-all duration-200 focus:outline-none" data-target="beverages">Beverages</button>
+            <button class="menu-tab px-4 py-2 font-medium text-sm transition-all duration-200 focus:outline-none" data-target="desserts">Desserts</button>
+            <button class="menu-tab px-4 py-2 font-medium text-sm transition-all duration-200 focus:outline-none" data-target="mandi">Mandi</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pb-20 pt-4">
+        <!-- Today's Specials -->
+        <section id="specials" class="menu-section active">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Today's Specials</h2>
+           <div class="overflow-x-auto pb-4">
+    <div class="flex flex-wrap md:flex-nowrap gap-4 justify-center md:justify-start">
+
+      <!-- Card 1 -->
+      <div class="bg-white rounded-lg shadow-sm overflow-hidden w-72 flex-shrink-0">
+        <div class="h-40 overflow-hidden">
+          <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Truffle%20Mushroom%20Risotto..." alt="Truffle Mushroom Risotto" class="w-full h-full object-cover object-top">
+        </div>
+        <div class="p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-medium text-gray-800 text-sm">Truffle Mushroom Risotto</h3>
+            <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs font-medium">Special</span>
+          </div>
+          <p class="text-sm text-gray-500 mb-2">Creamy Arborio rice with wild mushrooms and truffle oil</p>
+          <div class="flex justify-between items-center">
+            <span class="font-semibold text-gray-900">$24.95</span>
+            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600">
+              <i class="ri-add-line"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-white rounded-lg shadow-sm overflow-hidden w-72 flex-shrink-0">
+        <div class="h-40 overflow-hidden">
+          <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Grilled%20Sea%20Bass..." alt="Grilled Sea Bass" class="w-full h-full object-cover object-top">
+        </div>
+        <div class="p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-medium text-gray-800 text-sm">Grilled Sea Bass</h3>
+            <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs font-medium">Special</span>
+          </div>
+          <p class="text-sm text-gray-500 mb-2">With lemon butter sauce and seasonal vegetables</p>
+          <div class="flex justify-between items-center">
+            <span class="font-semibold text-gray-900">$28.50</span>
+            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600">
+              <i class="ri-add-line"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-white rounded-lg shadow-sm overflow-hidden w-72 flex-shrink-0">
+        <div class="h-40 overflow-hidden">
+          <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Chocolate%20Lava%20Cake..." alt="Chocolate Lava Cake" class="w-full h-full object-cover object-top">
+        </div>
+        <div class="p-4">
+          <div class="flex justify-between items-start mb-2">
+            <h3 class="font-medium text-gray-800 text-sm">Chocolate Lava Cake</h3>
+            <span class="bg-green-100 text-green-600 px-2 py-1 rounded text-xs font-medium">Special</span>
+          </div>
+          <p class="text-sm text-gray-500 mb-2">Warm chocolate cake with a molten center and vanilla ice cream</p>
+          <div class="flex justify-between items-center">
+            <span class="font-semibold text-gray-900">$12.95</span>
+            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600">
+              <i class="ri-add-line"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+            
+            <h2 class="text-xl font-semibold mb-4 mt-6 text-gray-800">All Menu Items</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Margherita%20Pizza%20with%20fresh%20basil%2C%20mozzarella%20cheese%2C%20and%20tomato%20sauce%20on%20a%20thin%20crust%2C%20wood-fired%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=4&orientation=squarish" alt="Margherita Pizza" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Margherita Pizza</h3>
+                            <span class="font-semibold text-gray-900">$16.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Classic pizza with tomato sauce, fresh mozzarella, and basil</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>  
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Caesar%20Salad%20with%20romaine%20lettuce%2C%20croutons%2C%20parmesan%20cheese%2C%20and%20caesar%20dressing%2C%20served%20in%20a%20white%20bowl%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=5&orientation=squarish" alt="Caesar Salad" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Caesar Salad</h3>
+                            <span class="font-semibold text-gray-900">$12.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Romaine lettuce, croutons, parmesan, and caesar dressing</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Beef%20Burger%20with%20cheese%2C%20lettuce%2C%20tomato%2C%20and%20special%20sauce%2C%20served%20with%20french%20fries%20on%20a%20wooden%20board%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=6&orientation=squarish" alt="Classic Beef Burger" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Classic Beef Burger</h3>
+                            <span class="font-semibold text-gray-900">$18.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Angus beef patty with cheese, lettuce, tomato, and special sauce</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Pasta%20Carbonara%20with%20creamy%20sauce%2C%20bacon%2C%20and%20parmesan%20cheese%2C%20garnished%20with%20black%20pepper%20and%20parsley%2C%20served%20in%20a%20white%20bowl%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=7&orientation=squarish" alt="Pasta Carbonara" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Pasta Carbonara</h3>
+                            <span class="font-semibold text-gray-900">$19.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Spaghetti with creamy egg sauce, pancetta, and parmesan</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Starters -->
+        <section id="starters" class="menu-section">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Starters</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Bruschetta%20with%20diced%20tomatoes%2C%20fresh%20basil%2C%20and%20balsamic%20glaze%20on%20toasted%20bread%2C%20served%20on%20a%20rustic%20wooden%20board%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=8&orientation=squarish" alt="Bruschetta" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Bruschetta</h3>
+                            <span class="font-semibold text-gray-900">$9.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Toasted bread topped with diced tomatoes, basil, and balsamic glaze</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Calamari%20Fritti%20with%20golden%20crispy%20coating%2C%20served%20with%20lemon%20wedges%20and%20aioli%20dip%20in%20a%20modern%20white%20bowl%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=9&orientation=squarish" alt="Calamari Fritti" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Calamari Fritti</h3>
+                            <span class="font-semibold text-gray-900">$14.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Crispy fried calamari served with lemon aioli</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Spinach%20Artichoke%20Dip%20with%20melted%20cheese%2C%20served%20with%20tortilla%20chips%20in%20a%20cast%20iron%20skillet%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=10&orientation=squarish" alt="Spinach Artichoke Dip" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Spinach Artichoke Dip</h3>
+                            <span class="font-semibold text-gray-900">$12.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Creamy spinach and artichoke dip served with tortilla chips</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Mozzarella%20Sticks%20with%20golden%20crispy%20coating%2C%20served%20with%20marinara%20sauce%20in%20a%20small%20white%20bowl%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=11&orientation=squarish" alt="Mozzarella Sticks" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Mozzarella Sticks</h3>
+                            <span class="font-semibold text-gray-900">$10.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Crispy breaded mozzarella served with marinara sauce</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Chicken%20Wings%20with%20spicy%20glaze%2C%20garnished%20with%20sesame%20seeds%20and%20green%20onions%2C%20served%20with%20blue%20cheese%20dip%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=12&orientation=squarish" alt="Spicy Chicken Wings" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Spicy Chicken Wings</h3>
+                            <span class="font-semibold text-gray-900">$15.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Crispy wings tossed in house-made spicy sauce</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Main Course -->
+        <section id="main" class="menu-section">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Main Course</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Grilled%20Salmon%20with%20lemon%20butter%20sauce%2C%20asparagus%2C%20and%20roasted%20potatoes%2C%20served%20on%20a%20white%20plate%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=13&orientation=squarish" alt="Grilled Salmon" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Grilled Salmon</h3>
+                            <span class="font-semibold text-gray-900">$26.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Atlantic salmon with lemon butter sauce and seasonal vegetables</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Filet%20Mignon%20with%20red%20wine%20reduction%2C%20mashed%20potatoes%2C%20and%20roasted%20vegetables%2C%20served%20on%20a%20black%20plate%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=14&orientation=squarish" alt="Filet Mignon" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Filet Mignon</h3>
+                            <span class="font-semibold text-gray-900">$34.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">8oz beef tenderloin with red wine reduction and truffle mashed potatoes</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Chicken%20Parmesan%20with%20melted%20mozzarella%20and%20marinara%20sauce%2C%20served%20with%20spaghetti%2C%20garnished%20with%20fresh%20basil%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=15&orientation=squarish" alt="Chicken Parmesan" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Chicken Parmesan</h3>
+                            <span class="font-semibold text-gray-900">$22.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Breaded chicken breast topped with marinara and mozzarella, served with pasta</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Vegetable%20Stir%20Fry%20with%20colorful%20bell%20peppers%2C%20broccoli%2C%20carrots%2C%20and%20tofu%20in%20a%20savory%20sauce%2C%20served%20over%20rice%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=16&orientation=squarish" alt="Vegetable Stir Fry" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Vegetable Stir Fry</h3>
+                            <span class="font-semibold text-gray-900">$18.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Fresh vegetables and tofu in a savory sauce served over jasmine rice</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Biryani -->
+        <section id="biryani" class="menu-section">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Biryani</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Chicken%20Biryani%20with%20aromatic%20basmati%20rice%2C%20tender%20chicken%20pieces%2C%20garnished%20with%20fried%20onions%20and%20fresh%20mint%2C%20served%20in%20a%20traditional%20bowl%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=17&orientation=squarish" alt="Chicken Biryani" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Chicken Biryani</h3>
+                            <span class="font-semibold text-gray-900">$18.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Fragrant basmati rice cooked with tender chicken and aromatic spices</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Lamb%20Biryani%20with%20aromatic%20basmati%20rice%2C%20tender%20lamb%20pieces%2C%20garnished%20with%20fried%20onions%20and%20fresh%20mint%2C%20served%20in%20a%20traditional%20bowl%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=18&orientation=squarish" alt="Lamb Biryani" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Lamb Biryani</h3>
+                            <span class="font-semibold text-gray-900">$22.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Fragrant basmati rice cooked with tender lamb and aromatic spices</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Vegetable%20Biryani%20with%20aromatic%20basmati%20rice%2C%20colorful%20mixed%20vegetables%2C%20garnished%20with%20fried%20onions%20and%20fresh%20mint%2C%20served%20in%20a%20traditional%20bowl%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=19&orientation=squarish" alt="Vegetable Biryani" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Vegetable Biryani</h3>
+                            <span class="font-semibold text-gray-900">$16.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Fragrant basmati rice cooked with seasonal vegetables and aromatic spices</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Prawn%20Biryani%20with%20aromatic%20basmati%20rice%2C%20succulent%20prawns%2C%20garnished%20with%20fried%20onions%20and%20fresh%20mint%2C%20served%20in%20a%20traditional%20bowl%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=20&orientation=squarish" alt="Prawn Biryani" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Prawn Biryani</h3>
+                            <span class="font-semibold text-gray-900">$23.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Fragrant basmati rice cooked with succulent prawns and aromatic spices</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Beverages -->
+        <section id="beverages" class="menu-section">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Beverages</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20photograph%20of%20a%20Mango%20Lassi%20in%20a%20tall%20glass%2C%20with%20a%20swirl%20of%20cream%20on%20top%2C%20garnished%20with%20mint%20leaf%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=21&orientation=squarish" alt="Mango Lassi" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Mango Lassi</h3>
+                            <span class="font-semibold text-gray-900">$5.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Refreshing yogurt drink blended with ripe mango and a hint of cardamom</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20photograph%20of%20a%20Fresh%20Lemonade%20in%20a%20tall%20glass%20with%20ice%20cubes%2C%20lemon%20slices%2C%20and%20mint%20leaves%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=22&orientation=squarish" alt="Fresh Lemonade" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Fresh Lemonade</h3>
+                            <span class="font-semibold text-gray-900">$4.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Freshly squeezed lemons with a touch of sweetness and mint</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20photograph%20of%20a%20Masala%20Chai%20in%20a%20traditional%20cup%2C%20with%20steam%20rising%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=23&orientation=squarish" alt="Masala Chai" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Masala Chai</h3>
+                            <span class="font-semibold text-gray-900">$3.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Traditional spiced tea with milk and aromatic spices</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20photograph%20of%20a%20Strawberry%20Smoothie%20in%20a%20tall%20glass%20with%20whipped%20cream%20on%20top%2C%20garnished%20with%20fresh%20strawberries%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=24&orientation=squarish" alt="Strawberry Smoothie" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Strawberry Smoothie</h3>
+                            <span class="font-semibold text-gray-900">$6.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Blend of fresh strawberries, yogurt, and honey</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Desserts -->
+        <section id="desserts" class="menu-section">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800">Desserts</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Tiramisu%20in%20a%20glass%20serving%20dish%2C%20with%20cocoa%20powder%20dusted%20on%20top%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=25&orientation=squarish" alt="Tiramisu" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Tiramisu</h3>
+                            <span class="font-semibold text-gray-900">$9.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Classic Italian dessert with layers of coffee-soaked ladyfingers and mascarpone cream</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20New%20York%20Cheesecake%20with%20berry%20compote%20on%20top%2C%20served%20on%20a%20white%20plate%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=26&orientation=squarish" alt="New York Cheesecake" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">New York Cheesecake</h3>
+                            <span class="font-semibold text-gray-900">$8.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Creamy cheesecake with a graham cracker crust and berry compote</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Gulab%20Jamun%20with%20sugar%20syrup%2C%20garnished%20with%20pistachios%2C%20served%20in%20a%20small%20elegant%20bowl%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=27&orientation=squarish" alt="Gulab Jamun" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Gulab Jamun</h3>
+                            <span class="font-semibold text-gray-900">$7.95</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Sweet milk dumplings soaked in rose-flavored sugar syrup</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-sm p-4 flex gap-3">
+                    <div class="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
+                        <img src="https://readdy.ai/api/search-image?query=A%20professional%20food%20photograph%20of%20Cr%C3%A8me%20Br%C3%BBl%C3%A9e%20with%20caramelized%20sugar%20top%2C%20garnished%20with%20fresh%20berries%2C%20served%20in%20a%20white%20ramekin%2C%20soft%20lighting%2C%20high-end%20restaurant%20presentation&width=200&height=200&seq=28&orientation=squarish" alt="Crème Brûlée" class="w-full h-full object-cover object-top">
+                    </div>
+                    <div class="flex-1">
+                        <div class="flex justify-between">
+                            <h3 class="font-medium text-gray-800">Crème Brûlée</h3>
+                            <span class="font-semibold text-gray-900">$10.50</span>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Rich vanilla custard with a layer of caramelized sugar</p>
+                        <div class="flex justify-end mt-2">
+                            <button class="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10 text-primary !rounded-button">
+                                <i class="ri-add-line"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Floating Action Buttons -->
+   <div class="fixed bottom-4 right-4 flex flex-col gap-3 z-40">
+  <!-- Call Button -->
+  <a href="tel:+15551234567"
+     class="flex items-center justify-center gap-2 bg-white shadow-md rounded-full px-4 py-3 text-gray-700 !rounded-button whitespace-nowrap">
+    <i class="ri-phone-line text-xl"></i>
+    <span class="hidden sm:inline">Call Us</span>
+  </a>
+
+  <!-- WhatsApp Button -->
+  <a href="https://wa.me/15551234567" target="_blank"
+     class="flex items-center justify-center gap-2 bg-green-600 text-white shadow-md rounded-full px-4 py-3 !rounded-button whitespace-nowrap">
+    <i class="ri-whatsapp-line text-xl"></i>
+    <span class="hidden sm:inline">WhatsApp</span>
+  </a>
+</div>
+
+    
+    <!-- Cart Summary -->
+    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-4 z-30 hidden" id="cartSummary">
+        <div class="flex justify-between items-center">
+            <div>
+                <span class="text-sm text-gray-500">5 items</span>
+                <p class="font-semibold">$78.85</p>
+            </div>
+            <button class="bg-primary text-white px-6 py-2 rounded-lg !rounded-button whitespace-nowrap">
+                View Cart
+            </button>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8 mt-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-lg font-medium mb-4">About Us</h3>
+                    <p class="text-sm text-gray-600">We serve authentic cuisine made with fresh ingredients and traditional recipes passed down through generations.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Hours</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex justify-between">
+                            <span>Monday - Friday</span>
+                            <span>11:00 AM - 10:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Saturday - Sunday</span>
+                            <span>10:00 AM - 11:00 PM</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium mb-4">Contact</h3>
+                    <ul class="text-sm text-gray-600 space-y-2">
+                        <li class="flex items-center gap-2">
+                            <i class="ri-map-pin-line"></i>
+                            <span>Back Side Of RTC Bustand, Madanapalli, 517325</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="ri-phone-line"></i>
+                            <a href="tel:+15551234567">+91 84969 50701 </a>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="ri-mail-line"></i>
+                            <a href="mailto:info@restaurant.com">info@seasonsrestaurant.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="mt-8 pt-6 border-t border-gray-200 text-center text-sm text-gray-500">
+                <p>&copy; 2025 Seasons Restaurant. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script id="tabNavigation">
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.menu-tab');
+            const sections = document.querySelectorAll('.menu-section');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const target = tab.getAttribute('data-target');
+                    
+                    // Update active tab
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    // Show target section, hide others
+                    sections.forEach(section => {
+                        if (section.id === target) {
+                            section.classList.add('active');
+                        } else {
+                            section.classList.remove('active');
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+    
+    <script id="headerScroll">
+        document.addEventListener('DOMContentLoaded', function() {
+            const header = document.querySelector('header');
+            
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 10) {
+                    header.classList.add('shadow-md');
+                } else {
+                    header.classList.remove('shadow-md');
+                }
+            });
+        });
+    </script>
+    
+    <script id="cartFunctionality">
+        document.addEventListener('DOMContentLoaded', function() {
+            const addButtons = document.querySelectorAll('button i.ri-add-line');
+            const cartSummary = document.getElementById('cartSummary');
+            let itemCount = 0;
+            
+            addButtons.forEach(button => {
+                button.parentElement.addEventListener('click', () => {
+                    itemCount++;
+                    if (itemCount > 0) {
+                        cartSummary.classList.remove('hidden');
+                    }
+                    
+                    // Animation feedback
+                    const btn = button.parentElement;
+                    btn.classList.add('scale-95', 'bg-primary', 'text-white');
+                    setTimeout(() => {
+                        btn.classList.remove('scale-95', 'bg-primary', 'text-white');
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
